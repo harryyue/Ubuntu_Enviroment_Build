@@ -1,0 +1,12 @@
+[user]
+	name = Harry Yue
+	email = harryyue123@163.com
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[color]
+	status=auto
+	branch=auto
+	interactive=auto
+	diff=auto
