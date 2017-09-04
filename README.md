@@ -14,6 +14,7 @@ After run install.sh script,we will install and configure below tools:
 	3.vim and ctags
 	4.ssh-server
 	5.tmux
+	6.kscope 1.6.2 ,cscope and graphviz
 
 ---------------------------------------------------------------------------
 Harry update it at Sep 2,2017
