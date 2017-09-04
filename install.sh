@@ -13,10 +13,22 @@ introduction()
 {
 	echo ""
 	echo "###############   Ubuntu Enviromrnt Install    ###############"
-	echo "###  Author:  Harry"
-	echo "###  Email:   harryyue123@163.com"
-	echo "###  Version: 14.04_V1.0"
-	echo "###  Date:    2017-09-01"
+	echo "###  Author:    Harry"
+	echo "###  Email:     harryyue123@163.com"
+	echo "###  Version:   14.04_V1.0"
+	echo "###  Create:    2017-09-01"
+	echo "###  Update:    2017-09-04"
+	echo "###  Description："
+	echo "###  We can auto-install below tools by this script,if also"
+	echo "###  need install other tools,you can update this script to "
+	echo "###  achieve it."
+	echo "###  Tools:"
+	echo "###  	 1.git and gitk"
+	echo "###  	 2.powerline"
+	echo "###  	 3.vim and ctags"
+	echo "###  	 4.ssh server"
+	echo "###  	 5.tmux"
+	echo "###  	 6.kscope 1.6.2 ,cscope and graphviz"
 	echo "##############################################################"
 	echo ""
 }
@@ -24,9 +36,7 @@ introduction()
 #Print the information of this script
 introduction
 cd $TOPDIR
-echo $TOPDIR
 echo -e $GREEN "Starting to install..." $RESET
-exit 1
 
 #Install and configure the git
 echo "[1/]Begin to install git and gitk..."
@@ -78,6 +88,13 @@ then
 	exit 1
 fi
 echo "[5/]done."
+
+#Install kscope 1.6.2
+echo "[6/]Install kscope..."
+echo $1 | sudo -S add-apt-repository ppa:fbirlik/kscope
+echo $1 | sudo -S apt-get update
+echo $1 | sudo -S apt-get -y install kscope-trinity cscope graphviz
+echo "[6/]done."
 
 echo -e $GREEN "Finish..." $RESET
 exit 0
