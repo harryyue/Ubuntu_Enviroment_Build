@@ -23,7 +23,7 @@ introduction()
 	echo "###  need install other tools,you can update this script to "
 	echo "###  achieve it."
 	echo "###  Tools:"
-	echo "###  	 1.git and gitk"
+	echo "###  	 1.git，gitk and gitg"
 	echo "###  	 2.powerline"
 	echo "###  	 3.vim and ctags"
 	echo "###  	 4.ssh server"
@@ -40,7 +40,7 @@ echo -e $GREEN "Starting to install..." $RESET
 
 #Install and configure the git
 echo "[1/]Begin to install git and gitk..."
-echo $1 | sudo -S apt-get -y install git gitk
+echo $1 | sudo -S apt-get -y install git gitk gitg
 cp gitconfig ~/.gitconfig 
 if [ $? != 0 ]
 then
