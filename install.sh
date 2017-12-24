@@ -65,7 +65,7 @@ echo "[2/6]done."
 #Install and configure vim
 echo "[3/6]Begin to install vim and ctags ..."
 echo $1 | sudo -S apt-get -y install vim ctags minicom
-rsync -a vimconfig/* ~
+rsync -a --exclude=vimconfig/ReadMe vimconfig/* ~
 if [ $? != 0 ]
 then
 	echo -e $RED "[ERROR] Can't find vim configure files..." $RESET

@@ -1,0 +1,55 @@
+一 .输入 ls -a会看到当前目录下隐藏的文件 
+
+.vim  .bashrc .vimrc 
+
+二 .备份原vim配置文件 
+
+A.在用户主目录新建目录vimbak
+
+例如:我的用户主目录在/home/cyg,不同的用户登录，用户主目录不一样,一般格式:/home/用户名 
+mkdir /home/cyg/vimbak 
+
+B.将用户主目录的.vim , .bashrc , .vimrc 备份到vimbak 
+
+例如:我的用户主目录是/home/cyg 
+
+cp  /home/cyg/.vim     /home/cyg/vimbak 
+cp  /home/cyg/.bashrc  /home/cyg/vimbak 
+co  /home/cyg/.vimrc   /home/cyg/vimbak 
+
+C.删除用户主目录原vim配置文件 
+
+例如:我的用户主目录时/home/cyg 
+
+rm -rf /home/cyg/.vim 
+
+
+三.配置新的vim 
+
+D.将vimconfig目录下的.vim目录拷贝到用户主目录 
+E.将vimconfig目录下的.vimrc , .bashrc拷贝到用户主目录下 
+F.执行source ~/.bashrc命令,使得.bashrc文件的修改生效
+
+四.在/usr/include下生成索引文件 
+
+1.输入alias,可以看到一条如下信息
+
+alias cindex='ctags -I __THROW -I __THROWNL -I __nonnull -R --c-kinds=+p
+--fields=+iaS --extra=+q'
+
+2.输入cindex说面的内容,生成tags文件  
+
+sudo ctags -I __THROW -I __THROWNL -I __nonnull -R --c-kinds=+p  --fields=+iaS --extra=+q 
+注意:输入的内容很长，你可以选择复制然后粘贴，不要一个个敲，容易出错
+
+五，测试 
+
+在用户主目录用vi打开一个test.c文件，输入如下内容 
+
+int main()
+{
+	FILE *fp;
+	
+	//如果配置正确，你可以看到FILE对应结构体的内容
+	fp->
+}
