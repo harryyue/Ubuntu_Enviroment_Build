@@ -50,27 +50,27 @@ fi
 echo "[1/6]done."
 
 #Install and apply for powerline
-echo "[2/6]Begin to install powerline ..."
-echo $1 | sudo -S apt-get -y install python-pip
-pip install git+git://github.com/powerline/powerline
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-echo $1 | sudo -S mv PowerlineSymbols.otf /usr/share/fonts/
-fc-cache -vf /usr/share/fonts/
-echo $1 | sudo -S  mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+#echo "[2/6]Begin to install powerline ..."
+#echo $1 | sudo -S apt-get -y install python-pip
+#pip install git+git://github.com/powerline/powerline
+#wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+#wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+#echo $1 | sudo -S mv PowerlineSymbols.otf /usr/share/fonts/
+#fc-cache -vf /usr/share/fonts/
+#echo $1 | sudo -S  mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+echo "[2/6]Begin to install the pv"
+echo $1 | sudo -S apt-get -y install pv
 echo "[2/6]done."
 
 #Install and configure vim
 echo "[3/6]Begin to install vim and ctags ..."
-echo $1 | sudo -S apt-get -y instll vim ctags minicom
-cd vimconfig
-cp -rf * ~
+echo $1 | sudo -S apt-get -y install vim ctags minicom
+rsync -a vimconfig/* ~
 if [ $? != 0 ]
 then
 	echo -e $RED "[ERROR] Can't find vim configure files..." $RESET
 	exit 1
 fi
-cd -
 echo "[3/6]done."
 
 #Install ssh server
@@ -95,6 +95,10 @@ echo $1 | sudo -S add-apt-repository ppa:fbirlik/kscope
 echo $1 | sudo -S apt-get update
 echo $1 | sudo -S apt-get -y install kscope-trinity cscope graphviz
 echo "[6/6]done."
+
+source ~/.bashrc
+echo $1 | sudo -S apt-get update
+echo $1 | sudo -S apt-get upgrade
 
 echo -e $GREEN "Finish..." $RESET
 exit 0
