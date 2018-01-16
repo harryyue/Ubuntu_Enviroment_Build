@@ -9,12 +9,12 @@ necessary tools and build a ubuntu environment.
 
 # Which tools will be installed?
 After run install.sh script,we will install and configure below tools:
-	1.git ,gitg and gitk
-	2.powerline
-	3.vim ,minicom and ctags
-	4.ssh-server
-	5.tmux
-	6.kscope 1.6.2 ,cscope and graphviz
+	1.Environment:tmux,powerline,pv"
+	2.Basic Tools:vim,minicom and ctags"
+	3.Code Management:git，gitk and gitg"
+	4.Code Viewer:kscope 1.6.2 ,cscope and graphviz"
+	5.Net Tools:ssh server"
+	6.Audio Tools:audacity"
 
 ---------------------------------------------------------------------------
-Harry update it at Sep 2,2017
+Harry update it at Jan 16,2018
