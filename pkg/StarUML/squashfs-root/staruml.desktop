@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=StarUML
+Comment=A sophisticated software modeler
+Exec=AppRun
+Terminal=false
+Type=Application
+Icon=staruml
+X-AppImage-Version=3.1.0
+X-AppImage-BuildId=fe053490-400c-11a9-3659-63740c0157bb
+Categories=Development;

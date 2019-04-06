@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Link
+Name=StarUML-3.1.0
+Name[en_AU]=StarUML-3.1.0
+Comment=UML design tools
+Comment[en_AU]=UML design tools
+Exec="~/bin/StarUML-3.1.0-update"
+Icon=~/bin/staruml.png
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Application;Development;

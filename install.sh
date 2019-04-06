@@ -4,105 +4,104 @@
 set -e
 
 TOPDIR=`pwd`
+CONF="$TOPDIR/conf"
+PKG="$TOPDIR/pkg"
+app="git gitk gitg pv vim ctags minicom tmux openssh-server audacity wine"
+deb=`find $PKG -name "*.deb" -exec basename {} \;| sort`
 
 RED="\033[31;1m"
 GREEN="\033[32;1m"
 RESET="\033[0m"
 
+
 introduction()
 {
 	echo ""
 	echo "###############   Ubuntu Enviromrnt Install    ###############"
-	echo "###  Author:    Harry"
-	echo "###  Email:     harryyue123@163.com"
-	echo "###  Version:   14.04_V1.0"
-	echo "###  Create:    2017-09-01"
-	echo "###  Update:    2018-01-16"
-	echo "###  Description："
-	echo "###  We can auto-install below tools by this script,if also"
-	echo "###  need install other tools,you can update this script to "
-	echo "###  achieve it."
-	echo "###  Tools:"
-	echo "###  	 1.Environment:tmux,powerline,pv"
-	echo "###  	 2.Basic Tools:vim,minicom and ctags"
-	echo "###  	 3.Code Management:git，gitk and gitg"
-	echo "###  	 4.Code Viewer:kscope 1.6.2 ,cscope and graphviz"
-	echo "###  	 5.Net Tools:ssh server"
-	echo "###  	 6.Audio Tools:audacity"
+	echo ""
+	echo "Author:    Harry"
+	echo "Email:     harryyue123@163.com"
+	echo "Version:   14.04_V2.0"
+	echo "Create:    2017-09-01"
+	echo "Update:    2019-04-06"
+	echo "Description："
+	echo "  We can auto-install below tools by this script,if also"
+	echo "  need install other tools,you can update this script to "
+	echo "  achieve it."
+	echo "Tools:"
+	echo "$app"
+	echo ""
+	echo "Deb package:"
+	echo "$deb"
+	echo ""
+	echo "Other application:"
+	echo "StarUML-3.1.0 repo"
 	echo "##############################################################"
 	echo ""
 }
 
 #Print the information of this script
 introduction
+
 cd $TOPDIR
 echo -e $GREEN "Starting to install..." $RESET
 
-#Install and configure the git
-echo "[1/7]Begin to install git and gitk..."
-echo $1 | sudo -S apt-get -y install git gitk gitg
-cp gitconfig ~/.gitconfig 
-if [ $? != 0 ]
-then
-	echo -e $RED "[ERROR] Can't find gitconfig..." $RESET
-	exit 1
-fi
-echo "[1/7]done."
-
-#Install and apply for powerline
-#echo "[2/6]Begin to install powerline ..."
-#echo $1 | sudo -S apt-get -y install python-pip
-#pip install git+git://github.com/powerline/powerline
-#wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-#wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-#echo $1 | sudo -S mv PowerlineSymbols.otf /usr/share/fonts/
-#fc-cache -vf /usr/share/fonts/
-#echo $1 | sudo -S  mv 10-powerline-symbols.conf /etc/fonts/conf.d/
-echo "[2/7]Begin to install the pv"
-echo $1 | sudo -S apt-get -y install pv
-echo "[2/7]done."
-
-#Install and configure vim
-echo "[3/7]Begin to install vim and ctags ..."
-echo $1 | sudo -S apt-get -y install vim ctags minicom
-rsync -a --exclude=vimconfig/ReadMe vimconfig/* ~
-if [ $? != 0 ]
-then
-	echo -e $RED "[ERROR] Can't find vim configure files..." $RESET
-	exit 1
-fi
-echo "[3/7]done."
-
-#Install ssh server
-echo "[4/7]Begin to install ssh-server..."
-echo $1 | sudo -S apt-get -y install openssh-server
-echo "[4/7]done."
-
-#Install and tmux tool
-echo "[5/7]Install tmux..."
-echo $1 | sudo -S apt-get -y install tmux
-cp tmux.conf ~/.tmux.conf 
-if [ $? != 0 ]
-then
-	echo -e $RED "[ERROR] Can't find tmux.conf..." $RESET
-	exit 1
-fi
-echo "[5/7]done."
-
-#Install kscope 1.6.2
-echo "[6/7]Install kscope..."
-echo $1 | sudo -S add-apt-repository ppa:fbirlik/kscope
-echo $1 | sudo -S apt-get update
-echo $1 | sudo -S apt-get -y install kscope-trinity cscope graphviz
-echo "[6/7]done."
-
-echo "[7/7]Begin to install ssh-server..."
-echo $1 | sudo -S apt-get -y install audacity
-echo "[7/7]done."
-
-source ~/.bashrc
+echo "Update the source list and application."
 echo $1 | sudo -S apt-get update
 echo $1 | sudo -S apt-get upgrade
+echo "done"
+
+#Install and configure the git
+echo "[1/4]Begin to install tools:$app"
+echo $1 | sudo -S apt-get -y install $app
+echo "[1/4]done."
+
+echo "[2/4]Install the configure files"
+conf_file=`find $CONF -maxdepth 1 -name ".*" | sort`
+for key in $conf_file
+do
+	cp -rf $key ~
+	if [ $? != 0 ]
+	then
+		echo -e $RED "[ERROR] Failed to copy `basename $key`" $RESET
+		exit 1
+	fi
+done
+echo "[2/4]done"
+
+#Install kscope 1.6.2
+#echo "[6/7]Install kscope..."
+#echo $1 | sudo -S add-apt-repository ppa:fbirlik/kscope
+#echo $1 | sudo -S apt-get update
+#echo $1 | sudo -S apt-get -y install kscope-trinity cscope graphviz
+#echo "[6/7]done."
+
+source ~/.bashrc
+
+echo "[3/4]Install *.deb pkg..."
+cd $PKG
+for pkg in $deb
+do
+	echo "Intall PKG:$pkg"
+echo $1 | sudo -S dpkg -i -y `basename $pkg`
+done
+echo "[3/4]done"
+
+echo "[4/4]Install StarUML-3.1.0,repo,fastboot,tmuxStart.sh"
+mkdir -p ~/bin && cd ~/bin && wget
+"https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" && chmod a+x appimagetool-x86_64.AppImage
+cd StarUML && appimagetool-x86_64.AppImage squashfs-root ~/bin/StarUML-3.1.0-update
+
+cp -rf StarUML/staruml.png repo fastboot tmuxStart.sh  ~/bin 
+cp StarUML/StarUML-3.1.0.desktop  ~/Desktop
+echo "[4/4]done"
+
+echo "Application install finished,re-update the source list and application."
+echo $1 | sudo -S apt-get update
+echo $1 | sudo -S apt-get upgrade
+echo "done"
+
+cd $TOPDIR
 
 echo -e $GREEN "Finish..." $RESET
 exit 0
