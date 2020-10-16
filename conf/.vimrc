@@ -14,7 +14,7 @@ filetype plugin indent on
 " Syntax highlighting.
 syntax on
 " Setting colorscheme
-" color mycolor
+color mycolor
 " Other settings.
 set   autoindent
 set   autoread
@@ -42,7 +42,9 @@ set   history=100
 set   hlsearch
 set   ignorecase
 set   incsearch
+set   rtp+=/usr/local/lib/python2.7/dist-packages/powerline_status-2.7-py2.7.egg/powerline/bindings/vim/
 set   laststatus=2
+set   t_Co=256
 set   mouse=a
 set   mouse=c
 set   number
@@ -137,8 +139,8 @@ let g:LookupFile_AllowNewFiles=0
 " Man.vim
 source $VIMRUNTIME/ftplugin/man.vim
 " snipMate
-let g:snips_author="Du Jianfeng"
-let g:snips_email="cmdxiaoha@163.com"
+let g:snips_author="Yue Harry"
+let g:snips_email="harryyue123@163.com"
 let g:snips_copyright="SicMicro, Inc"
 " plugin shortcuts
 function! RunShell(Msg, Shell)
@@ -172,3 +174,6 @@ set noswapfile
 set tags+=/usr/include/tags
 set tags+=./tags
 map ta :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
